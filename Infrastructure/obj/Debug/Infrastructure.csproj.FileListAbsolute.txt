@@ -1,0 +1,17 @@
+C:\Users\William\documents\visual studio 2013\Projects\PodcastGrabba\Infrastructure\bin\Debug\Infrastructure.dll
+C:\Users\William\documents\visual studio 2013\Projects\PodcastGrabba\Infrastructure\bin\Debug\Infrastructure.pdb
+C:\Users\William\documents\visual studio 2013\Projects\PodcastGrabba\Infrastructure\bin\Debug\Infrastructure.pri
+C:\Users\William\documents\visual studio 2013\Projects\PodcastGrabba\Infrastructure\obj\Debug\Infrastructure.csprojResolveAssemblyReference.cache
+C:\Users\William\documents\visual studio 2013\Projects\PodcastGrabba\Infrastructure\obj\Debug\Infrastructure.dll
+C:\Users\William\documents\visual studio 2013\Projects\PodcastGrabba\Infrastructure\obj\Debug\Infrastructure.pdb
+C:\Users\William\documents\visual studio 2013\Projects\PodcastGrabba\Infrastructure\obj\Debug\priconfig.xml
+C:\Users\William\documents\visual studio 2013\Projects\PodcastGrabba\Infrastructure\obj\Debug\priconfig.xml.intermediate
+C:\Users\William\documents\visual studio 2013\Projects\PodcastGrabba\Infrastructure\obj\Debug\layout.resfiles
+C:\Users\William\documents\visual studio 2013\Projects\PodcastGrabba\Infrastructure\obj\Debug\layout.resfiles.intermediate
+C:\Users\William\documents\visual studio 2013\Projects\PodcastGrabba\Infrastructure\obj\Debug\resources.resfiles
+C:\Users\William\documents\visual studio 2013\Projects\PodcastGrabba\Infrastructure\obj\Debug\resources.resfiles.intermediate
+C:\Users\William\documents\visual studio 2013\Projects\PodcastGrabba\Infrastructure\obj\Debug\pri.resfiles
+C:\Users\William\documents\visual studio 2013\Projects\PodcastGrabba\Infrastructure\obj\Debug\pri.resfiles.intermediate
+C:\Users\William\documents\visual studio 2013\Projects\PodcastGrabba\Infrastructure\obj\Debug\qualifiers.txt
+C:\Users\William\documents\visual studio 2013\Projects\PodcastGrabba\Infrastructure\obj\Debug\qualifiers.txt.intermediate
+C:\Users\William\documents\visual studio 2013\Projects\PodcastGrabba\Infrastructure\obj\Debug\MultipleQualifiersPerDimensionFound.txt

@@ -1,0 +1,7 @@
+<XamlCompilerSaveState>
+  <ReferenceAssemblyList>
+    <LocalAssembly PathName="c:\users\william\documents\visual studio 2013\projects\podcastgrabba\podcastgrabba\obj\debug\intermediatexaml\podcastgrabba.exe" HashGuid="a498b586-45f6-640c-c787-b1d97eabf2c9" />
+    <ReferenceAssembly PathName="c:\users\william\documents\visual studio 2013\projects\podcastgrabba\downloaderservice\bin\debug\downloaderservice.dll" HashGuid="885a2a93-e9a5-4018-b449-546db10dcfca" />
+    <ReferenceAssembly PathName="c:\users\william\documents\visual studio 2013\projects\podcastgrabba\infrastructure\bin\debug\infrastructure.dll" HashGuid="300effc1-6ec9-3c9f-fcc5-2a6e08b7e42b" />
+  </ReferenceAssemblyList>
+</XamlCompilerSaveState>
