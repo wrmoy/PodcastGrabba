@@ -1,3 +1,0 @@
-C:\Users\William\Documents\Visual Studio 2013\Projects\PodcastGrabba\DownloaderService\DownloaderService.csproj;neutral
-C:\Users\William\Documents\Visual Studio 2013\Projects\PodcastGrabba\Infrastructure\Infrastructure.csproj;neutral
-C:\Users\William\Documents\Visual Studio 2013\Projects\PodcastGrabba\PodcastGrabba\PodcastGrabba.csproj;neutral
