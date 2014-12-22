@@ -14,6 +14,7 @@ namespace PodcastGrabba.ViewModels
         private IEnumerable<string> items;
         private int searchProgress;
         private string searchBoxText;
+        private bool isSearching;
 
         public SearchViewModel()
         {
@@ -51,17 +52,17 @@ namespace PodcastGrabba.ViewModels
             }
         }
 
-        public int SearchProgress
+        public bool IsSearching
         {
             get
             {
-                return this.searchProgress;
+                return this.isSearching;
             }
 
             set
             {
-                this.searchProgress = value;
-                this.RaisePropertyChanged("SearchProgress");
+                this.isSearching = value;
+                this.RaisePropertyChanged("IsSearching");
             }
         }
 
@@ -72,9 +73,10 @@ namespace PodcastGrabba.ViewModels
                 return;
             }
 
+            this.IsSearching = true;
             var results = await this.searcher.SearchAsync(this.SearchBoxText);
             this.Items = results.Items.Select(item => item.CollectionName);
+            this.IsSearching = false;
         }
-
     }
 }

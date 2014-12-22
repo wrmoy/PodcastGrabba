@@ -37,10 +37,8 @@
         <ProgressBar
             Grid.Row="1"
             Grid.ColumnSpan="2"
-            Minimum="0"
-            Maximum="100"
-            Height="10"
-            Value="{Binding SearchProgress}" />
+            IsIndeterminate="{Binding IsSearching}"
+            Height="10" />
         <ListBox 
             Grid.Row="2"
             Grid.ColumnSpan="2"
