@@ -1,11 +1,10 @@
 ﻿using DownloaderService;
 using Infrastructure;
+using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.Web.Syndication;
 
 namespace PodcastGrabba.ViewModels
@@ -17,10 +16,10 @@ namespace PodcastGrabba.ViewModels
         public MainPageViewModel()
         {
             this.rssDownloader = new RssDownloader("http://www.giantbomb.com/podcast-xml/giant-bombcast/");
-            this.GrabCommand = new RelayCommand(this.OnGrab);
+            this.GrabCommand = new DelegateCommand(this.OnGrab);
         }
 
-        public RelayCommand GrabCommand { get; set; }
+        public ICommand GrabCommand { get; set; }
 
         public float GrabProgress
         {
