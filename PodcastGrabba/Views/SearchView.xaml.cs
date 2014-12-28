@@ -1,4 +1,7 @@
-﻿using PodcastGrabba.ViewModels;
+﻿using DownloaderService;
+using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Practices.Unity;
+using PodcastGrabba.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,12 +22,20 @@ using Windows.UI.Xaml.Navigation;
 
 namespace PodcastGrabba.Views
 {
-    public sealed partial class SearchView : PivotItem
+    public sealed partial class SearchView : PivotItem, IView
     {
         public SearchView()
         {
-            this.DataContext = new SearchViewModel();
             this.InitializeComponent();
+        }
+
+        [Dependency]
+        public SearchViewModel ViewModel
+        {
+            set
+            {
+                DataContext = value;
+            }
         }
 
         public void SearchBox_GotFocus(object sender, RoutedEventArgs args)

@@ -6,6 +6,8 @@
     xmlns:vm="using:PodcastGrabba.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="using:Microsoft.Practices.Prism.Mvvm"
+    prism:ViewModelLocator.AutoWireViewModel="true"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"

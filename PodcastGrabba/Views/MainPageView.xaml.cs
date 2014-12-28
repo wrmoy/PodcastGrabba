@@ -1,4 +1,7 @@
-﻿using PodcastGrabba.ViewModels;
+﻿using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Practices.Prism.StoreApps;
+using Microsoft.Practices.Unity;
+using PodcastGrabba.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,12 +24,20 @@ namespace PodcastGrabba.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPageView : Page
+    public sealed partial class MainPageView : VisualStateAwarePage, IView
     {
         public MainPageView()
         {
             this.InitializeComponent();
-            this.DataContext = new MainPageViewModel();
+        }
+
+        [Dependency]
+        public MainPageViewModel ViewModel
+        {
+            set
+            {
+                this.DataContext = value;
+            }
         }
 
         /// <summary>

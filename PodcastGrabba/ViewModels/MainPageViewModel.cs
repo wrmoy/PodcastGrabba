@@ -1,5 +1,6 @@
 ﻿using DownloaderService;
 using Infrastructure;
+using Microsoft.Practices.Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,9 @@ using Windows.Web.Syndication;
 
 namespace PodcastGrabba.ViewModels
 {
-    public class MainPageViewModel : ViewModelBase
+    public class MainPageViewModel : ViewModel
     {
-        private IEnumerable<string> items;
         private RssDownloader rssDownloader;
-        private int searchProgress;
 
         public MainPageViewModel()
         {

@@ -1,4 +1,5 @@
 ﻿using Infrastructure;
+using Microsoft.Practices.Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PodcastGrabba.ViewModels
 {
-    public class MockSearchViewModel : ViewModelBase
+    public class MockSearchViewModel : ViewModel
     {
         private IList<string> items = new List<string>();
 

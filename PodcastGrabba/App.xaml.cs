@@ -1,9 +1,15 @@
-﻿using PodcastGrabba.Views;
+﻿using DownloaderService;
+using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Practices.Prism.Mvvm.Interfaces;
+using Microsoft.Practices.Unity;
+using PodcastGrabba.Views;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -17,16 +23,15 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
-// The WebView Application template is documented at http://go.microsoft.com/fwlink/?LinkID=391641
-
 namespace PodcastGrabba
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public sealed partial class App : Application
+    public sealed partial class App : MvvmAppBase
     {
         private TransitionCollection transitions;
+        private readonly UnityContainer diContainer = new UnityContainer();
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -38,68 +43,42 @@ namespace PodcastGrabba
             this.Suspending += this.OnSuspending;
         }
 
-        /// <summary>
-        /// Invoked when the application is launched normally by the end user.  Other entry points
-        /// will be used when the application is launched to open a specific file, to display
-        /// search results, and so forth.
-        /// </summary>
-        /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override Type GetPageType(string pageToken)
         {
-#if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
-                this.DebugSettings.EnableFrameRateCounter = true;
-            }
-#endif
+            var assemblyQualifiedAppType = this.GetType().AssemblyQualifiedName;
+            var pageNameWithParameter = assemblyQualifiedAppType.Replace(this.GetType().FullName, this.GetType().Namespace + ".Views.{0}View");
+            var viewFullName = string.Format(CultureInfo.InvariantCulture, pageNameWithParameter, pageToken);
+            var viewType = Type.GetType(viewFullName);
+            return viewType;
+        }
 
-            Frame rootFrame = Window.Current.Content as Frame;
+        protected override Task OnInitializeAsync(IActivatedEventArgs args)
+        {
+            var task = base.OnInitializeAsync(args);
 
-            // Do not repeat app initialization when the Window already has content,
-            // just ensure that the window is active
-            if (rootFrame == null)
-            {
-                // Create a Frame to act as the navigation context and navigate to the first page
-                rootFrame = new Frame();
+            // Register MvvmAppBase services with the container so that view models can take dependencies on them
+            this.diContainer.RegisterInstance<ISessionStateService>(SessionStateService);
+            this.diContainer.RegisterInstance<INavigationService>(NavigationService);
 
-                // TODO: change this value to a cache size that is appropriate for your application
-                rootFrame.CacheSize = 1;
+            // App specific registrations
+            this.diContainer.RegisterType<IHttpClientWrapper, HttpClientWrapper>();
+            this.diContainer.RegisterType<IPodcastSearcher, iTunesSearcher>();
 
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    // TODO: Load state from previously suspended application
-                }
+            ViewModelLocationProvider.SetDefaultViewModelFactory(viewModelType => this.diContainer.Resolve(viewModelType));
+            ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver(this.GetViewModelTypeFromView);
 
-                // Place the frame in the current Window
-                Window.Current.Content = rootFrame;
-            }
+            return task;
+        }
 
-            if (rootFrame.Content == null)
-            {
-                // Removes the turnstile navigation for startup.
-                if (rootFrame.ContentTransitions != null)
-                {
-                    this.transitions = new TransitionCollection();
-                    foreach (var c in rootFrame.ContentTransitions)
-                    {
-                        this.transitions.Add(c);
-                    }
-                }
-
-                rootFrame.ContentTransitions = null;
-                rootFrame.Navigated += this.RootFrame_FirstNavigated;
-
-                // When the navigation stack isn't restored navigate to the first page,
-                // configuring the new page by passing required information as a navigation
-                // parameter
-                if (!rootFrame.Navigate(typeof(MainPageView), e.Arguments))
-                {
-                    throw new Exception("Failed to create initial page");
-                }
-            }
-
-            // Ensure the current window is active
-            Window.Current.Activate();
+        protected override Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
+        {
+            // Use the logical name for the view to navigate to. The default convention
+            // in the NavigationService will be to append "Page" to the name and look 
+            // for that page in a .Views child namespace in the project. IF you want another convention
+            // for mapping view names to view types, you can override 
+            // the MvvmAppBase.GetPageNameToTypeResolver method
+            NavigationService.Navigate("MainPage", null);
+            return Task.FromResult<object>(null);
         }
 
         /// <summary>
@@ -123,6 +102,15 @@ namespace PodcastGrabba
 
             // TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        private Type GetViewModelTypeFromView(Type viewModelType)
+        {
+            var assemblyQualifiedAppType = this.GetType().AssemblyQualifiedName;
+            var pageNameWithParameter = assemblyQualifiedAppType.Replace(this.GetType().FullName, this.GetType().Namespace + ".ViewModels.{0}Model");
+            var viewFullName = string.Format(CultureInfo.InvariantCulture, pageNameWithParameter, viewModelType.Name);
+            var viewType = Type.GetType(viewFullName);
+            return viewType;
         }
     }
 }

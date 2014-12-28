@@ -10,14 +10,16 @@ using Windows.Web.Http;
 
 namespace DownloaderService
 {
-    public class iTunesSearcher
+    public class iTunesSearcher : IPodcastSearcher
     {
         private const string SearchLocation = "https://itunes.apple.com/search";
-        private HttpClient httpClient;
+        private IHttpClientWrapper httpClient;
+        private DataContractJsonSerializer serializer;
 
-        public iTunesSearcher()
+        public iTunesSearcher(IHttpClientWrapper httpClient)
         {
-            this.httpClient = new HttpClient();
+            this.httpClient = httpClient;
+            this.serializer = new DataContractJsonSerializer(typeof(SearchResults));
         }
 
         async public Task<SearchResults> SearchAsync(string searchTerm)
@@ -36,8 +38,7 @@ namespace DownloaderService
 
             var readContentTask = response.Content.ReadAsInputStreamAsync();
             var contentStream = await readContentTask;
-            var serializer = new DataContractJsonSerializer(typeof(SearchResults));
-            var results = serializer.ReadObject(contentStream.AsStreamForRead()) as SearchResults;
+            var results = this.serializer.ReadObject(contentStream.AsStreamForRead()) as SearchResults;
             return results;
         }
 

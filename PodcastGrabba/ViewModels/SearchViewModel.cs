@@ -1,28 +1,30 @@
 ﻿using DownloaderService;
 using Infrastructure;
+using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PodcastGrabba.ViewModels
 {
-    public class SearchViewModel : ViewModelBase
+    public class SearchViewModel : ViewModel
     {
-        private iTunesSearcher searcher;
+        private IPodcastSearcher searcher;
         private IEnumerable<string> items;
-        private int searchProgress;
         private string searchBoxText;
         private bool isSearching;
 
-        public SearchViewModel()
+        public SearchViewModel(IPodcastSearcher searcher)
         {
-            this.searcher = new iTunesSearcher();
-            this.SearchCommand = new RelayCommand(this.OnSearch);
+            this.searcher = searcher;
+            this.SearchCommand = new DelegateCommand(this.OnSearch);
         }
 
-        public RelayCommand SearchCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
 
         public string SearchBoxText
         {
@@ -34,7 +36,7 @@ namespace PodcastGrabba.ViewModels
             set
             {
                 this.searchBoxText = value;
-                this.RaisePropertyChanged("SearchBoxText");
+                this.OnPropertyChanged(() => this.SearchBoxText);
             }
         }
         
@@ -48,7 +50,7 @@ namespace PodcastGrabba.ViewModels
             set
             {
                 this.items = value;
-                this.RaisePropertyChanged("Items");
+                this.OnPropertyChanged(() => this.Items);
             }
         }
 
@@ -62,7 +64,7 @@ namespace PodcastGrabba.ViewModels
             set
             {
                 this.isSearching = value;
-                this.RaisePropertyChanged("IsSearching");
+                this.OnPropertyChanged(() => this.IsSearching);
             }
         }
 

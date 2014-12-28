@@ -34,13 +34,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-  </ItemGroup>
-  <ItemGroup>
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HttpClientWrapper.cs" />
+    <Compile Include="IHttpClientWrapper.cs" />
+    <Compile Include="IPodcastSearcher.cs" />
     <Compile Include="iTunesSearcher.cs" />
     <Compile Include="RssDownloader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
