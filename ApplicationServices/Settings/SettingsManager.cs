@@ -1,4 +1,5 @@
-﻿using ApplicationServices.Interfaces.Settings;
+﻿using ApplicationServices.Interfaces;
+using ApplicationServices.Interfaces.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,21 +10,30 @@ namespace ApplicationServices.Settings
 {
     public class SettingsManager : ISettingsManager
     {
-        internal readonly List<FeedEntry> savedFeeds = new List<FeedEntry>();
+        internal readonly const string SavedFeedsKey = "SavedFeeds";
+        internal readonly IStorageProperty<List<FeedEntry>> savedFeeds;
+
+        public SettingsManager()
+        {
+            this.savedFeeds = new RoamingStorageProperty<List<FeedEntry>>(SavedFeedsKey, new List<FeedEntry>());
+        }
 
         public IReadOnlyCollection<FeedEntry> SavedFeeds
         {
-            get { return this.savedFeeds; }
+            get { return this.savedFeeds.Value; }
         }
 
         public void AddFeed(FeedEntry feed)
         {
-            throw new NotImplementedException();
+            this.savedFeeds.Value.Add(feed);
         }
 
         public void RemoveFeed(FeedEntry feed)
         {
-            throw new NotImplementedException();
+            if (this.savedFeeds.Value.Contains(feed))
+            {
+                this.savedFeeds.Value.Remove(feed);
+            }
         }
     }
 }
