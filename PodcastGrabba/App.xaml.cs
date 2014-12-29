@@ -20,6 +20,7 @@ namespace PodcastGrabba
     /// </summary>
     public sealed partial class App : MvvmAppBase
     {
+        private TransitionCollection transitions;
         private readonly UnityContainer diContainer = new UnityContainer();
 
         /// <summary>
