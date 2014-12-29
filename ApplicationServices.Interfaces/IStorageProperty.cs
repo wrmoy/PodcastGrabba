@@ -8,7 +8,7 @@ namespace ApplicationServices.Interfaces
 {
     public interface IStorageProperty<T>
     {
-        public bool Exists { get; }
-        public T Value { get; set; }
+        bool Exists { get; }
+        T Value { get; set; }
     }
 }

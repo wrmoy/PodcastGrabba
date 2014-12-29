@@ -1,7 +1,11 @@
-﻿namespace ApplicationServices.Interfaces.Settings
+﻿using System.Runtime.Serialization;
+
+namespace ApplicationServices.Interfaces.Settings
 {
+    [DataContract]
     public class FeedEntry
     {
-        string FeedName { get; set; }
+        [DataMember]
+        public string FeedName { get; set; }
     }
 }

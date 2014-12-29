@@ -80,6 +80,14 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <ProjectReference Include="..\ApplicationServices.Interfaces\ApplicationServices.Interfaces.csproj">
+      <Project>{18665751-c2b7-438d-b044-837228ccff39}</Project>
+      <Name>ApplicationServices.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ApplicationServices\ApplicationServices.csproj">
+      <Project>{dd9fe34f-fdce-4676-af06-08213b160559}</Project>
+      <Name>ApplicationServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DownloaderService\DownloaderService.csproj">
       <Project>{2dfef164-8652-4f7e-b00a-77ad2ea4618b}</Project>
       <Name>DownloaderService</Name>
@@ -100,11 +108,15 @@
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\MockSearchViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
+    <Compile Include="ViewModels\UserPodcastsViewModel.cs" />
     <Compile Include="Views\MainPageView.xaml.cs">
       <DependentUpon>MainPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchView.xaml.cs">
       <DependentUpon>SearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserPodcastsView.xaml.cs">
+      <DependentUpon>UserPodcastsView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +148,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserPodcastsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

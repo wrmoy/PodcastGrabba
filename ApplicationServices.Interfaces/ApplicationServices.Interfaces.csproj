@@ -41,6 +41,7 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IStorageProperty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\FeedEntry.cs" />
     <Compile Include="Settings\ISettingsManager.cs" />

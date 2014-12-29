@@ -10,7 +10,7 @@ namespace ApplicationServices.Settings
 {
     public class SettingsManager : ISettingsManager
     {
-        internal readonly const string SavedFeedsKey = "SavedFeeds";
+        internal const string SavedFeedsKey = "SavedFeeds";
         internal readonly IStorageProperty<List<FeedEntry>> savedFeeds;
 
         public SettingsManager()

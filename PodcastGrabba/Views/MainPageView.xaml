@@ -23,7 +23,7 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Pivot>
-            <PivotItem 
+            <local:UserPodcastsView 
                 Header="My Podcasts" />
             <local:SearchView 
                 Header="Search"/>

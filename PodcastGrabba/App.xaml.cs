@@ -1,25 +1,15 @@
-﻿using DownloaderService;
+﻿using ApplicationServices.Interfaces.Settings;
+using ApplicationServices.Settings;
+using DownloaderService;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
 using Microsoft.Practices.Unity;
-using PodcastGrabba.Views;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
@@ -30,7 +20,6 @@ namespace PodcastGrabba
     /// </summary>
     public sealed partial class App : MvvmAppBase
     {
-        private TransitionCollection transitions;
         private readonly UnityContainer diContainer = new UnityContainer();
 
         /// <summary>
@@ -63,6 +52,7 @@ namespace PodcastGrabba
             // App specific registrations
             this.diContainer.RegisterType<IHttpClientWrapper, HttpClientWrapper>();
             this.diContainer.RegisterType<IPodcastSearcher, iTunesSearcher>();
+            this.diContainer.RegisterType<ISettingsManager, SettingsManager>();
 
             ViewModelLocationProvider.SetDefaultViewModelFactory(viewModelType => this.diContainer.Resolve(viewModelType));
             ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver(this.GetViewModelTypeFromView);
