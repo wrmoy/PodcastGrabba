@@ -1,10 +1,6 @@
 ﻿using ApplicationServices.Interfaces;
 using ApplicationServices.Interfaces.Settings;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApplicationServices.Settings
 {
@@ -25,14 +21,21 @@ namespace ApplicationServices.Settings
 
         public void AddFeed(FeedEntry feed)
         {
-            this.savedFeeds.Value.Add(feed);
+            if (this.savedFeeds.Value.Contains(feed))
+            {
+                var entries = this.savedFeeds.Value;
+                entries.Add(feed);
+                this.savedFeeds.Value = entries;
+            }
         }
 
         public void RemoveFeed(FeedEntry feed)
         {
             if (this.savedFeeds.Value.Contains(feed))
             {
-                this.savedFeeds.Value.Remove(feed);
+                var entries = this.savedFeeds.Value;
+                entries.Add(feed);
+                this.savedFeeds.Value = entries;
             }
         }
     }

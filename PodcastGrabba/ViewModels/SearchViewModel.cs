@@ -1,4 +1,5 @@
-﻿using DownloaderService;
+﻿using ApplicationServices.Interfaces.Settings;
+using DownloaderService;
 using Infrastructure;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
@@ -14,17 +15,22 @@ namespace PodcastGrabba.ViewModels
     public class SearchViewModel : ViewModel
     {
         private IPodcastSearcher searcher;
-        private IEnumerable<string> items;
+        private ISettingsManager settingsManager;
+        private IEnumerable<SearchResultItem> items;
         private string searchBoxText;
         private bool isSearching;
 
-        public SearchViewModel(IPodcastSearcher searcher)
+        public SearchViewModel(IPodcastSearcher searcher, ISettingsManager settingsManager)
         {
             this.searcher = searcher;
+            this.settingsManager = settingsManager;
+
             this.SearchCommand = new DelegateCommand(this.OnSearch);
+            this.SubscribeCommand = new DelegateCommand<object>(this.OnSubscribe);
         }
 
-        public ICommand SearchCommand { get; set; }
+        public ICommand SearchCommand { get; private set; }
+        public ICommand SubscribeCommand { get; private set; }
 
         public string SearchBoxText
         {
@@ -40,7 +46,7 @@ namespace PodcastGrabba.ViewModels
             }
         }
         
-        public IEnumerable<string> Items
+        public IEnumerable<SearchResultItem> SearchResultItems
         {
             get
             {
@@ -50,7 +56,7 @@ namespace PodcastGrabba.ViewModels
             set
             {
                 this.items = value;
-                this.OnPropertyChanged(() => this.Items);
+                this.OnPropertyChanged(() => this.SearchResultItems);
             }
         }
 
@@ -77,8 +83,15 @@ namespace PodcastGrabba.ViewModels
 
             this.IsSearching = true;
             var results = await this.searcher.SearchAsync(this.SearchBoxText);
-            this.Items = results.Items.Select(item => item.CollectionName);
+            this.SearchResultItems = results.Items;
             this.IsSearching = false;
+        }
+
+        private void OnSubscribe(object parameter)
+        {
+            var resultItem = parameter as SearchResultItem;
+            var feedEntry = new FeedEntry { FeedName = resultItem.CollectionName };
+            this.settingsManager.AddFeed(feedEntry);
         }
     }
 }

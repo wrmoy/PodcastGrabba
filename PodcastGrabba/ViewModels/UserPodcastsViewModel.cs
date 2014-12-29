@@ -1,10 +1,8 @@
 ﻿using ApplicationServices.Interfaces.Settings;
+using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PodcastGrabba.ViewModels
 {
@@ -15,7 +13,11 @@ namespace PodcastGrabba.ViewModels
         public UserPodcastsViewModel(ISettingsManager settingsManager)
         {
             this.settingsManager = settingsManager;
+
+            this.UnsubscribeCommand = new DelegateCommand<object>(this.OnUnsubscribe);
         }
+
+        public ICommand UnsubscribeCommand { get; private set; }
 
         public IEnumerable<FeedEntry> UserFeeds
         {
@@ -23,6 +25,12 @@ namespace PodcastGrabba.ViewModels
             {
                 return this.settingsManager.SavedFeeds;
             }
+        }
+
+        private void OnUnsubscribe(object parameter)
+        {
+            var feedEntry = parameter as FeedEntry;
+            this.settingsManager.RemoveFeed(feedEntry);
         }
     }
 }

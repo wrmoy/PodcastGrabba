@@ -39,6 +39,10 @@
       <Project>{18665751-c2b7-438d-b044-837228ccff39}</Project>
       <Name>ApplicationServices.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{c6ad2ba5-b39c-4a98-9449-8879f92b63c6}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />

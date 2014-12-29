@@ -10,30 +10,30 @@ namespace DownloaderService
     public class SearchResultItem
     {
         [DataMember(Name = "artistName")]
-        public string ArtistName;
+        public string ArtistName { get; set; }
 
         [DataMember(Name = "trackName")]
-        public string TrackName;
+        public string TrackName { get; set; }
 
         [DataMember(Name = "collectionName")]
-        public string CollectionName;
+        public string CollectionName { get; set; }
 
         [DataMember(Name = "feedUrl")]
-        public string FeedUrl;
+        public string FeedUrl { get; set; }
 
         [DataMember(Name = "artworkUrl30")]
-        public string ArtworkUrl30;
+        public string ArtworkUrl30 { get; set; }
 
         [DataMember(Name = "artworkUrl60")]
-        public string ArtworkUrl60;
+        public string ArtworkUrl60 { get; set; }
 
         [DataMember(Name = "artworkUrl100")]
-        public string ArtworkUrl100;
+        public string ArtworkUrl100 { get; set; }
 
         [DataMember(Name = "artworkUrl600")]
-        public string ArtworkUrl600;
+        public string ArtworkUrl600 { get; set; }
 
         [DataMember(Name = "trackCount")]
-        public string TrackCount;
+        public string TrackCount { get; set; }
     }
 }

@@ -1,9 +1,10 @@
 ﻿<PivotItem
     x:Class="PodcastGrabba.Views.SearchView"
+    Name="SearchViewPivotItem"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:PodcastGrabba.Views"
-    xmlns:vm="using:PodcastGrabba.ViewModels"
+    xmlns:vm="using:PodcastGrabba.MockViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="using:Microsoft.Practices.Prism.Mvvm"
@@ -13,6 +14,32 @@
     d:DesignWidth="400"
     d:DataContext="{d:DesignInstance Type=vm:MockSearchViewModel, IsDesignTimeCreatable=True}">
 
+    <PivotItem.Resources>
+        <DataTemplate x:Key="SearchResultItemTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="{Binding CollectionName}" />
+                <TextBlock 
+                    Grid.Row="1"
+                    Text="{Binding ArtistName}" />
+                <Button
+                    Grid.Column="1"
+                    Grid.RowSpan="2"
+                    Content="Subscribe"
+                    Command="{Binding ElementName=SearchViewPivotItem, Path=DataContext.SubscribeCommand}"
+                    CommandParameter="{Binding}"/>
+            </Grid>
+        </DataTemplate>
+    </PivotItem.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -41,10 +68,10 @@
             Grid.ColumnSpan="2"
             IsIndeterminate="{Binding IsSearching}"
             Height="10" />
-        <ListBox 
+        <ListView 
             Grid.Row="2"
             Grid.ColumnSpan="2"
-            ItemsSource="{Binding Items}" 
-            Height="400" />
+            ItemsSource="{Binding SearchResultItems}" 
+            ItemTemplate="{StaticResource SearchResultItemTemplate}" />
     </Grid>
 </PivotItem>
