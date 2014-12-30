@@ -90,13 +90,17 @@
       <Project>{dd9fe34f-fdce-4676-af06-08213b160559}</Project>
       <Name>ApplicationServices</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DownloaderService\DownloaderService.csproj">
-      <Project>{2dfef164-8652-4f7e-b00a-77ad2ea4618b}</Project>
-      <Name>DownloaderService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
       <Project>{c6ad2ba5-b39c-4a98-9449-8879f92b63c6}</Project>
       <Name>Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InternetServices.Interfaces\InternetServices.Interfaces.csproj">
+      <Project>{b32d630e-648f-4d1e-b6b0-d43f38a08254}</Project>
+      <Name>InternetServices.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InternetServices\InternetServices.csproj">
+      <Project>{15c3d8d7-4579-46a5-a653-bb838a1339b5}</Project>
+      <Name>InternetServices</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

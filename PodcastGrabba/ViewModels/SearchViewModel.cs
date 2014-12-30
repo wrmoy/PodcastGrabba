@@ -1,5 +1,5 @@
 ﻿using ApplicationServices.Interfaces.Settings;
-using DownloaderService;
+using InternetServices.Interfaces;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using System.Collections.Generic;
@@ -14,6 +14,7 @@ namespace PodcastGrabba.ViewModels
         private IEnumerable<SearchResultItem> items;
         private string searchBoxText;
         private bool isSearching;
+        private string errorText = string.Empty;
 
         public SearchViewModel(IPodcastSearcher searcher, ISettingsManager settingsManager)
         {
@@ -38,6 +39,20 @@ namespace PodcastGrabba.ViewModels
             {
                 this.searchBoxText = value;
                 this.OnPropertyChanged(() => this.SearchBoxText);
+            }
+        }
+
+        public string ErrorText
+        {
+            get
+            {
+                return this.errorText;
+            }
+
+            set
+            {
+                this.errorText = value;
+                this.OnPropertyChanged(() => this.ErrorText);
             }
         }
         
@@ -77,8 +92,18 @@ namespace PodcastGrabba.ViewModels
             }
 
             this.IsSearching = true;
-            var results = await this.searcher.SearchAsync(this.SearchBoxText);
-            this.SearchResultItems = results.Items;
+            this.ErrorText = string.Empty;
+            try
+            {
+                var results = await this.searcher.SearchAsync(this.SearchBoxText);
+                this.SearchResultItems = results.Items;
+            }
+            catch
+            {
+                this.ErrorText = "Could not get search results";
+                this.SearchResultItems = null;
+            }
+            
             this.IsSearching = false;
         }
 

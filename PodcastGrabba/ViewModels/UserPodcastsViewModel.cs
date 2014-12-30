@@ -1,7 +1,6 @@
 ﻿using ApplicationServices.Interfaces.Settings;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 

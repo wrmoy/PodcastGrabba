@@ -44,6 +44,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="20" />
+            <RowDefinition Height="12" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -68,8 +69,14 @@
             Grid.ColumnSpan="2"
             IsIndeterminate="{Binding IsSearching}"
             Height="10" />
-        <ListView 
+        <TextBlock
             Grid.Row="2"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            Text="{Binding ErrorText}"
+            />
+        <ListView 
+            Grid.Row="3"
             Grid.ColumnSpan="2"
             ItemsSource="{Binding SearchResultItems}" 
             ItemTemplate="{StaticResource SearchResultItemTemplate}" />

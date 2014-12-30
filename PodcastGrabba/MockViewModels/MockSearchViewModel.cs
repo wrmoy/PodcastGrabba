@@ -1,4 +1,4 @@
-﻿using DownloaderService;
+﻿using InternetServices.Interfaces;
 using Microsoft.Practices.Prism.Mvvm;
 using System.Collections.Generic;
 
@@ -16,20 +16,19 @@ namespace PodcastGrabba.MockViewModels
             }
         }
 
+        public string ErrorText
+        {
+            get { return "Error text"; }
+        }
+
         public IEnumerable<SearchResultItem> SearchResultItems
         {
-            get
-            {
-                return this.items;
-            }
+            get { return this.items; }
         }
 
         public bool IsSearching
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
 }

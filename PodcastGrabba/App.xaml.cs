@@ -1,6 +1,7 @@
 ﻿using ApplicationServices.Interfaces.Settings;
 using ApplicationServices.Settings;
-using DownloaderService;
+using InternetServices;
+using InternetServices.Interfaces;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
 using Microsoft.Practices.Unity;
