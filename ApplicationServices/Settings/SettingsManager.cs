@@ -21,7 +21,7 @@ namespace ApplicationServices.Settings
 
         public void AddFeed(FeedEntry feed)
         {
-            if (this.savedFeeds.Value.Contains(feed))
+            if (!this.savedFeeds.Value.Contains(feed))
             {
                 var entries = this.savedFeeds.Value;
                 entries.Add(feed);
@@ -34,7 +34,7 @@ namespace ApplicationServices.Settings
             if (this.savedFeeds.Value.Contains(feed))
             {
                 var entries = this.savedFeeds.Value;
-                entries.Add(feed);
+                entries.Remove(feed);
                 this.savedFeeds.Value = entries;
             }
         }
