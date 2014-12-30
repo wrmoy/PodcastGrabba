@@ -2,6 +2,7 @@
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace PodcastGrabba.ViewModels
@@ -19,7 +20,7 @@ namespace PodcastGrabba.ViewModels
 
         public ICommand UnsubscribeCommand { get; private set; }
 
-        public IEnumerable<FeedEntry> UserFeeds
+        public ObservableCollection<FeedEntry> UserFeeds
         {
             get
             {

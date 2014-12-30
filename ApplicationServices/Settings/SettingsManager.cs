@@ -1,6 +1,8 @@
 ﻿using ApplicationServices.Interfaces;
 using ApplicationServices.Interfaces.Settings;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace ApplicationServices.Settings
 {
@@ -8,24 +10,25 @@ namespace ApplicationServices.Settings
     {
         internal const string SavedFeedsKey = "SavedFeeds";
         internal readonly IStorageProperty<List<FeedEntry>> savedFeeds;
+        internal readonly ObservableCollection<FeedEntry> observableFeeds;
 
         public SettingsManager()
         {
             this.savedFeeds = new RoamingStorageProperty<List<FeedEntry>>(SavedFeedsKey, new List<FeedEntry>());
+            this.observableFeeds = new ObservableCollection<FeedEntry>(this.savedFeeds.Value);
         }
 
-        public IReadOnlyCollection<FeedEntry> SavedFeeds
+        public ObservableCollection<FeedEntry> SavedFeeds
         {
-            get { return this.savedFeeds.Value; }
+            get { return this.observableFeeds; }
         }
 
         public void AddFeed(FeedEntry feed)
         {
             if (!this.savedFeeds.Value.Contains(feed))
             {
-                var entries = this.savedFeeds.Value;
-                entries.Add(feed);
-                this.savedFeeds.Value = entries;
+                this.observableFeeds.Add(feed);
+                this.savedFeeds.Value = this.observableFeeds.ToList();
             }
         }
 
@@ -33,9 +36,8 @@ namespace ApplicationServices.Settings
         {
             if (this.savedFeeds.Value.Contains(feed))
             {
-                var entries = this.savedFeeds.Value;
-                entries.Remove(feed);
-                this.savedFeeds.Value = entries;
+                this.observableFeeds.Remove(feed);
+                this.savedFeeds.Value = this.observableFeeds.ToList();
             }
         }
     }
