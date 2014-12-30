@@ -52,8 +52,8 @@ namespace PodcastGrabba
 
             // App specific registrations
             this.diContainer.RegisterType<IHttpClientWrapper, HttpClientWrapper>();
-            this.diContainer.RegisterType<IPodcastSearcher, iTunesSearcher>();
-            this.diContainer.RegisterType<ISettingsManager, SettingsManager>();
+            this.diContainer.RegisterType<IPodcastSearcher, iTunesSearcher>(new ContainerControlledLifetimeManager());
+            this.diContainer.RegisterType<ISettingsManager, SettingsManager>(new ContainerControlledLifetimeManager());
 
             ViewModelLocationProvider.SetDefaultViewModelFactory(viewModelType => this.diContainer.Resolve(viewModelType));
             ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver(this.GetViewModelTypeFromView);
